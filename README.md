@@ -10,5 +10,4 @@
 
 
 **UEFA CHAMPIONS LEAGUE 2021/22 ANALYSIS**
-1. Data provided by  ![Kaggle](https://img.shields.io/badge/Kaggle-035a7d?style=for-the-badge&logo=kaggle&logoColor=white)
-2. **STATUS** **-** **NOT COMPLETE**
+1. **STATUS** **-** **NOT COMPLETE**
