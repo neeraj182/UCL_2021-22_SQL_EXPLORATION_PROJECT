@@ -1,3 +1,4 @@
+USE new_databse;
 
 -- FROM TABLE defending
 SELECT *
@@ -66,9 +67,167 @@ SELECT *, (balls_recoverd / match_played) as avg_balls_recoverd_per_match, (tack
 (t_won / match_played) as avg_tackleWon_per_match, (clearance_attempted / match_played) as avg_clearaneAttempted_per_match
 FROM defending;
 
+-- From attacking Table
+SELECT *
+FROM attacking 
+LIMIT 5;
 
+SELECT COUNT(player_name)
+FROM attacking;
 
--- FROM TABLE attacking
+SELECT club, SUM(assists) as Total_assists,
+SUM(corner_taken) as Total_corners,
+SUM(offsides) as Total_offsides,
+SUM(dribbles) as Total_driblles
+FROM attacking 
+GROUP BY club 
+ORDER BY SUM(assists) DESC; 
+
+SELECT club, COUNT(club) as No_of_players
+FROM attacking 
+GROUP BY club
+ORDER BY COUNT(club) DESC ;
+
+SELECT *, (dribbles/match_played) as avg_dribble_per_match
+FROM attacking 
+ORDER BY dribbles DESC 
+LIMIT 10;
+
+SELECT POSITION, SUM(assists), SUM(corner_taken), SUM(dribbles)
+FROM attacking
+GROUP BY position
+ORDER BY SUM(assists) DESC;
+
+-- FROM distributon Table 
+
+SELECT *
+FROM distributon 
+LIMIT 5;
+
+ALTER TABLE distributon 
+RENAME COLUMN cross_complted TO cross_completed;
+
+SELECT club, COUNT(club)
+FROM distributon 
+GROUP by club
+ORDER BY COUNT(club) DESC;
+
+SELECT club, SUM(pass_attempted) as Total_pass_attempted,
+SUM(pass_completed) as Total_pass_completed,
+SUM(cross_attempted) as Total_cross_attempted,
+SUM(cross_completed) as Total_cross_completed,
+SUM(freekicks_taken) as Total_freeKicks_taken
+FROM distributon
+GROUP BY club 
+ORDER BY SUM(pass_attempted) DESC, SUM(pass_completed) DESC;
+
+SELECT SUM(pass_attempted) as Total_pass_attempted, 
+SUM(pass_completed) as Total_pass_completed,
+SUM(cross_attempted) as Total_cross_attempted,
+SUM(cross_completed) as Total_cross_completed,
+SUM(freekicks_taken) as Total_freeeKicks_taken
+FROM distributon;
+
+SELECT club, player_name, position, pass_attempted, pass_completed, match_played
+FROM distributon 
+ORDER BY pass_completed DESC
+LIMIT 10;
+
+SELECT club, player_name, position, cross_attempted , cross_completed , match_played
+FROM distributon 
+ORDER BY cross_completed  DESC
+LIMIT 10;
+
+SELECT player_name, club, POSITION, freekicks_taken, match_played
+FROM distributon 
+ORDER BY freekicks_taken DESC 
+LIMIT 10;
+
+SELECT club, player_name, position, pass_attempted, pass_completed, match_played,
+ROUND((pass_completed / match_played), 0) as passCompleted_per_match
+FROM distributon 
+ORDER BY pass_completed DESC
+LIMIT 10;
+
+SELECT player_name, club, position, cross_attempted, cross_completed, match_played,
+ROUND((cross_completed/match_played), 0) as crossCompleted_per_match
+FROM distributon
+ORDER BY cross_completed DESC 
+LIMIT 10;
+
+SELECT POSITION, SUM(pass_attempted) AS Total_pass_attempted, 
+SUM(pass_completed) as Total_pass_completed, 
+SUM(cross_attempted) as Total_cross_attempted, 
+SUM(cross_completed) as Total_cross_completed, 
+ROUND(AVG(pass_accuracy), 2) as Avg_pass_accuracy, ROUND(AVG(cross_accuracy), 2) as Avg_cross_accuracy
+FROM distributon 
+GROUP BY position
+ORDER BY SUm(pass_completed) DESC;
+
+-- From Goals Table
+SELECT *
+FROM goals
+LIMIT 5;
+
+SELECT club, COUNT(club)
+FROM goals 
+GROUP BY club
+ORDER BY COUNT(club) DESC;
+
+SELECT club, SUM(goals) as Total_goasl_club,
+SUM(penalties) as Total_penalties_club
+FROM goals
+GROUP BY club
+ORDER BY SUM(goals) DESC, SUM(penalties) DESC ;
+
+SELECT SUM(goals) as Total_goals,
+SUM(right_foot) as Total_goalsFrom_right_Foot,
+SUM(left_foot) as Total_goalsFrom_left_Foot,
+SUM(headers) as Total_goalsFrom_headers,
+SUM(inside_area) as Total_goalsFrom_insideArea,
+SUM(outside_area) as Total_goalsFrom_outsieArea,
+SUM(penalties) as Total_goalsFrom_penalties
+FROM goals;
+
+SELECT player_name, club, POSITION, goals, right_foot, match_played
+FROM goals
+ORDER BY right_foot DESC, goals DESC
+LIMIT 10;
+
+SELECT player_name, club, POSITION, goals, left_foot, match_played
+FROM goals
+ORDER BY left_foot DESC, goals DESC
+LIMIT 10;
+
+SELECT player_name, club, POSITION, goals, headers, match_played
+FROM goals
+ORDER BY headers DESC, goals DESC
+LIMIT 10;
+
+SELECT player_name, club, POSITION, goals, inside_area , match_played
+FROM goals
+ORDER BY inside_area DESC, goals DESC
+LIMIT 10;
+
+SELECT player_name, club, POSITION, goals, outside_area , match_played
+FROM goals
+ORDER BY outside_area DESC, goals DESC
+LIMIT 10;
+
+SELECT player_name, club, POSITION, goals, penalties, match_played
+FROM goals
+ORDER BY penalties DESC, goals DESC
+LIMIT 10;
+
+SELECT POSITION, SUM(goals) as Total_goals,
+SUM(right_foot) as Total_rightFoot_goals, SUM(left_foot) as Total_leftFoot_goals,
+SUM(headers) as Total_header_goals,
+SUM(inside_area) as Total_goals_insideArea, SUM(outside_area) as Total_goals_outsideArea,
+SUM(penalties) as Total_penalties
+FROM goals
+GROUP BY position
+ORDER BY SUM(goals) DESC;
+
 
 
 
