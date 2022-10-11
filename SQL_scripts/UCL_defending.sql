@@ -1,3 +1,5 @@
+
+-- FROM TABLE defending
 SELECT *
 FROM defending;
 
@@ -66,8 +68,7 @@ FROM defending;
 
 
 
-
-
+-- FROM TABLE attacking
 
 
 
