@@ -240,37 +240,82 @@ FROM goals
 GROUP BY position
 ORDER BY SUM(goals) DESC;
 
+-- FROM disciplinary table
+SELECT *
+FROM disciplinary 
+LIMIT 5;
+
+SELECT club, COUNT(club)
+FROM disciplinary 
+GROUP BY club
+ORDER BY COUNT(club) DESC;
+
+-- club stats
+SELECT club, SUM(fouls_committed) as Total_fouls_committed,
+SUM(fouls_suffered) as Total_fouls_suffered,
+SUM(yellow) as Total_yellowCards,
+SUM(red) as Total_redCards
+FROM disciplinary 
+GROUP BY club
+ORDER BY SUM(fouls_committed) DESC, SUM(fouls_suffered) DESC;
 
 
+SELECT club,  SUM(fouls_committed) as Total_fouls_commited
+FROM disciplinary 
+GROUP BY club
+ORDER BY SUM(fouls_committed) DESC 
+LIMIT 10;
 
 
+SELECT club,  SUM(fouls_suffered) as Total_fouls_suffered
+FROM disciplinary 
+GROUP BY club
+ORDER BY SUM(fouls_suffered) DESC 
+LIMIT 10;
 
+SELECT club, SUM(fouls_committed) as Total_fouls_committed,
+SUM(fouls_suffered) as Total_fouls_suffered,
+SUM(yellow) as Total_yellowCards,
+SUM(red) as Total_redCards
+FROM disciplinary 
+WHERE club = 'Man. City'
+GROUP BY club
+ORDER BY SUM(fouls_committed) DESC, SUM(fouls_suffered) DESC;
 
+-- Positional Stats
 
+SELECT position, SUM(fouls_committed) as Total_fouls_committed,
+SUM(fouls_suffered) as Total_fouls_suffered,
+SUM(yellow) as Total_yellowCards,
+SUM(red) as Total_redCards
+FROM disciplinary 
+GROUP BY position
+ORDER BY SUM(fouls_committed) DESC, SUM(fouls_suffered) DESC;
 
+-- TOP 10
+SELECT player_name, club, position, fouls_committed, minutes_played, match_played, ROUND((fouls_committed/match_played)) as Fouls_committed_per_match 
+FROM disciplinary
+ORDER BY fouls_committed DESC
+LIMIT 10;
 
+SELECT player_name, club, position, fouls_suffered, minutes_played, match_played, ROUND((fouls_suffered /match_played)) as Fouls_suffered_per_match
+FROM disciplinary
+ORDER BY fouls_suffered  DESC
+LIMIT 10;
 
+SELECT player_name, club, minutes_played, match_played
+FROM disciplinary 
+ORDER BY minutes_played DESC 
+LIMIT 10;
 
+SELECT player_name, club, minutes_played, match_played
+FROM disciplinary 
+WHERE minutes_played >= 1000
+ORDER BY minutes_played DESC;
 
+SELECT player_name, club, red, match_played
+FROM disciplinary
+ORDER BY red DESC 
+LIMIT 10;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- END
