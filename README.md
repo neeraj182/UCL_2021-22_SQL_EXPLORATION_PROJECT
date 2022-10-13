@@ -5,4 +5,15 @@
 
 
 **UEFA CHAMPIONS LEAGUE 2021/22 ANALYSIS**
-1. **STATUS** **-** **NOT COMPLETE**
+## Data available
+1. Attacking
+2. Defending
+3. Goals
+4. Disciplinary
+5. Distribution
+
+<b>Exploring the UEFA Champions Legaue Season 2021-2022 Data with the help od SQL.</b> 
+<div align="center">
+  <img src=https://media.giphy.com/media/Az1VC4qEZ6T9TtCwPi/giphy.gif width=500 height=300>
+  <img src=https://media.giphy.com/media/AecCpGuDM2G2129qn1/giphy.gif width=500 height=300>
+</div>
